@@ -7,9 +7,8 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
+@SuppressWarnings("java:S106")
 public class PersonService {
 
     @Autowired
@@ -23,10 +22,9 @@ public class PersonService {
         personRepository.save(new Person("4","Sarah", 27, "V"));
         personRepository.save(new Person("5","Missy", 31, "V"));
 
-        List<Person> persons = personRepository.findAll("M");
-        for (Person p : persons){
-            System.err.println(p);
-        }
+
+        personRepository.findAll("M").forEach(System.err::println);
+
 
         Person person1 = personRepository.findPersonByName("Jane");
         System.err.println(person1);
@@ -34,7 +32,7 @@ public class PersonService {
         Person person2 = personRepository.findPersonByName("jane");
         System.err.println(person2); // Not found, because is case senstive
 
-        System.err.println("Nomber of records " + personRepository.count());
+        System.err.println("Number of records " + personRepository.count());
     }
 
 }
